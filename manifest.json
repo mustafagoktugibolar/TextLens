@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "TextLens",
+  "version": "1.0",
+  "description": "Translate or AI search selected text",
+  "permissions": ["activeTab", "scripting"],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["widget.js", "widget.css", "assets/*"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "action": {
+    "default_popup": "index.html"
+  }
+}
