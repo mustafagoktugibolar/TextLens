@@ -1,11 +1,19 @@
 import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-
-// ⚠️ vueDevTools geçici olarak kaldırıldı çünkü bu tür hata genelde ondan gelir
+import { viteStaticCopy } from 'vite-plugin-static-copy'
 
 export default defineConfig({
-  plugins: [vue()],
+  plugins: [
+    vue(),
+    viteStaticCopy({
+      targets: [
+        { src: 'index.html', dest: '.' },
+        { src: 'public/content.js', dest: '.' },
+        { src: 'manifest.json', dest: '.' }
+      ]
+    })
+  ],
   build: {
     rollupOptions: {
       input: 'src/content-widget.js',
@@ -13,8 +21,7 @@ export default defineConfig({
         format: 'iife',
         entryFileNames: 'widget.js'
       }
-    },
-    inlineDynamicImports: false
+    }
   },
   resolve: {
     alias: {
